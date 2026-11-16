@@ -1,15 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>게시판 및 방명록</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            margin: 20px;
+        }
+        /* 상단 메뉴 스타일 */
+        .nav-menu {
+            padding: 10px 0;
+        }
+        .nav-menu a {
+            font-size: 18px;
+            color: #551A8B;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        /* 방명록 영역 (처음에는 숨김 처리) */
+        #guestbook-section {
+            display: none; 
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            max-width: 800px;
+        }
+    </style>
 </head>
 <body>
-  <hr>
-<a href="https://github.com/seteve5004-cmd/web1102/issues/1#issue-6411894784"> 이슈 계시판 이동 </a> | <br>
-<a href="#"> 방명록 이동 </a>
-<hr>
-    
+
+    <hr>
+    <div class="nav-menu">
+        <a href="#issue" onclick="alert('이슈 게시판입니다.'); return false;">이슈 게시판 이동</a> | <br>
+        <!-- 클릭 시 showGuestbook() 함수 실행 -->
+        <a href="#guestbook" onclick="showGuestbook(); return false;">방명록 이동</a>
+    </div>
+    <hr>
+
+    <!-- 같은 페이지 내에 나타날 방명록 영역 (Giscus 연동) -->
+    <div id="guestbook-section">
+        <h2>방명록</h2>
+        <p>GitHub 계정으로 로그인하여 방명록을 남겨보세요!</p>
+        
+        <!-- Giscus 스크립트가 삽입될 컨테이너 -->
+        <div id="giscus-container"></div>
+    </div>
+
+    <script>
+        let giscusLoaded = false;
+
+        // '방명록 이동' 링크 클릭 시 실행되는 함수
+        function showGuestbook() {
+            const guestbook = document.getElementById('guestbook-section');
+            
+            // 숨겨져 있던 방명록 영역을 보이도록 변경
+            guestbook.style.display = 'block';
+            
+            // 부드럽게 방명록 위치로 스크롤 이동
+            guestbook.scrollIntoView({ behavior: 'smooth' });
+
+            // Giscus가 아직 로드되지 않았다면 동적으로 스크립트 삽입 (최적화)
+            if (!giscusLoaded) {
+                loadGiscus();
+                giscusLoaded = true;
+            }
+        }
+
+        // Giscus 스크립트를 동적으로 생성하여 삽입하는 함수
+        function loadGiscus() {
+            const container = document.getElementById('giscus-container');
+            const script = document.createElement('script');
+
+            script.src = "https://giscus.app/client.js";
+            script.setAttribute("data-repo", "본인아이디/저장소이름"); // 예: "hongildong/my-website"
+            script.setAttribute("data-repo-id", "YOUR_REPO_ID"); // GitHub Giscus 설정에서 발급받은 값
+            script.setAttribute("data-category", "Announcements"); // 사용할 Discussions 카테고리
+            script.setAttribute("data-category-id", "YOUR_CATEGORY_ID"); // GitHub Giscus 설정에서 발급받은 값
+            script.setAttribute("data-mapping", "pathname");
+            script.setAttribute("data-strict", "0");
+            script.setAttribute("data-reactions-enabled", "1");
+            script.setAttribute("data-emit-metadata", "0");
+            script.setAttribute("data-input-position", "bottom");
+            script.setAttribute("data-theme", "light");
+            script.setAttribute("data-lang", "ko");
+            script.crossOrigin = "anonymous";
+            script.async = true;
+
+            container.appendChild(script);
+        }
+    </script>
+
 </body>
 </html>
