@@ -41,7 +41,7 @@
     </div>
     <hr>
 
-    <!-- 같은 페이지 내에 나타날 방명록 영역 (Giscus 연동) -->
+    <!-- 같은 페이지 내에 나타날 방명록 영역 -->
     <div id="guestbook-section">
         <h2>방명록</h2>
         <p>GitHub 계정으로 로그인하여 방명록을 남겨보세요!</p>
@@ -70,22 +70,22 @@
             }
         }
 
-        // Giscus 스크립트를 동적으로 생성하여 삽입하는 함수
+        // 전달주신 Giscus 스크립트를 동적으로 생성하여 삽입하는 함수
         function loadGiscus() {
             const container = document.getElementById('giscus-container');
             const script = document.createElement('script');
 
             script.src = "https://giscus.app/client.js";
-            script.setAttribute("data-repo", "본인아이디/저장소이름"); // 예: "hongildong/my-website"
-            script.setAttribute("data-repo-id", "YOUR_REPO_ID"); // GitHub Giscus 설정에서 발급받은 값
-            script.setAttribute("data-category", "Announcements"); // 사용할 Discussions 카테고리
-            script.setAttribute("data-category-id", "YOUR_CATEGORY_ID"); // GitHub Giscus 설정에서 발급받은 값
+            script.setAttribute("data-repo", "seteve5004-cmd/FInalWeb");
+            script.setAttribute("data-repo-id", "R_kgDOVvx7PA");
+            script.setAttribute("data-category", "General");
+            script.setAttribute("data-category-id", "DIC_kwDOVvx7PM4DLOYV");
             script.setAttribute("data-mapping", "pathname");
             script.setAttribute("data-strict", "0");
             script.setAttribute("data-reactions-enabled", "1");
             script.setAttribute("data-emit-metadata", "0");
             script.setAttribute("data-input-position", "bottom");
-            script.setAttribute("data-theme", "light");
+            script.setAttribute("data-theme", "preferred_color_scheme");
             script.setAttribute("data-lang", "ko");
             script.crossOrigin = "anonymous";
             script.async = true;
